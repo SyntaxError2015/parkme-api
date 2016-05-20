@@ -22,7 +22,7 @@ sftp-config.json
 *.o
 *.a
 *.so
-gost/gost
+parkme-api/parkme-api
 debug
 
 # Folders

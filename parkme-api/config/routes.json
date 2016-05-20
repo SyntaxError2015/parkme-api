@@ -1,0 +1,18 @@
+[
+  {
+    "id": "TransactionsRoute",
+    "endpoint": "/transactions",
+    "actions": {
+      "CreateTransaction": {
+        "type": "POST",
+        "allowAnonymous": false,
+        "requireAdmin": false
+      },
+      "GetTransaction": {
+        "type": "GET",
+        "allowAnonymous": false,
+        "requireAdmin": false
+      }
+    }
+  }
+]
