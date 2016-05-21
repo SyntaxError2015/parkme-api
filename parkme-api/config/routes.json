@@ -1,18 +1,24 @@
 [
-  {
-    "id": "TransactionsRoute",
-    "endpoint": "/transactions",
-    "actions": {
-      "CreateTransaction": {
-        "type": "POST",
-        "allowAnonymous": false,
-        "requireAdmin": false
-      },
-      "GetTransaction": {
-        "type": "GET",
-        "allowAnonymous": false,
-        "requireAdmin": false
-      }
+    {
+        "id": "ParksRoute",
+        "endpoint": "/parks",
+        "actions": {
+            "Register": {
+                "type": "POST",
+                "allowAnonymous": false,
+                "requireAdmin": false
+            }
+        }
+    },
+    {
+        "id": "SlotsRoute",
+        "endpoint": "/slots",
+        "actions": {
+            "UpdateSlot": {
+                "type": "PUT",
+                "allowAnonymous": false,
+                "requireAdmin": false
+            }
+        }
     }
-  }
 ]

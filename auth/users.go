@@ -3,12 +3,12 @@ package auth
 import (
 	"errors"
 	"fmt"
+	"log"
 	"parkme-api/auth/identity"
 	"parkme-api/email"
 	"parkme-api/util"
 	"parkme-api/util/dateutil"
 	"parkme-api/util/hashutil"
-	"log"
 	"time"
 
 	"gopkg.in/mgo.v2/bson"
@@ -46,7 +46,7 @@ func CreateAppUser(emailAddress, password string, accountType int, activationSer
 		AccountType:                    accountType,
 		ActivateAccountToken:           token,
 		ActivateAccountTokenExpireDate: dateutil.NextDateFromNow(accountActivationTokenExpireTime),
-		AccountStatus:                  identity.AccountStatusDeactivated,
+		AccountStatus:                  identity.AccountStatusActivated,
 	}
 
 	err = identity.CreateUser(user)
@@ -54,7 +54,7 @@ func CreateAppUser(emailAddress, password string, accountType int, activationSer
 		return nil, err
 	}
 
-	go sendAccountActivationEmail(emailAddress, activationServiceLink, token)
+	// go sendAccountActivationEmail(emailAddress, activationServiceLink, token)
 
 	return user, nil
 }

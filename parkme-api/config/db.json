@@ -1,7 +1,7 @@
 {
 	"databaseName": "parkme_db",
-	"user": "",
-	"pass": "",
+	"user": "parkme-user",
+	"pass": "parkme-pass",
 	"driver": "mongodb",
 	"hosts": [ 
 		"localhost"

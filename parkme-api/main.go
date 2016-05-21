@@ -1,7 +1,9 @@
 package main
 
 import (
-	"parkme-api/api/app/transactionapi"
+	"log"
+	"os"
+	"os/signal"
 	"parkme-api/api/framework"
 	"parkme-api/api/framework/authapi"
 	"parkme-api/api/framework/devapi"
@@ -12,9 +14,6 @@ import (
 	"parkme-api/orm/service"
 	"parkme-api/security"
 	"parkme-api/servers"
-	"log"
-	"os"
-	"os/signal"
 	"runtime"
 )
 
@@ -31,7 +30,6 @@ type FrameworkAPIContainer struct {
 // This also registers all the framework's vital endpoints
 type ApplicationAPIContainer struct {
 	FrameworkAPIContainer
-	transactionapi.TransactionsAPI
 }
 
 // DevAPIContainer is used only for development purposes.
