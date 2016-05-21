@@ -4,9 +4,10 @@ import "gopkg.in/mgo.v2/bson"
 
 // Slot reprents a square in a parking lot, where the car is parked
 type Slot struct {
-	ID       bson.ObjectId `bson:"_id,omitempty" json:"id"`
-	ParkID   bson.ObjectId `bson:"parkID,omitempty" json:"parkID"`
-	Position Point         `bson:"position,omitempty" json:"position"`
+	ID         bson.ObjectId `bson:"_id,omitempty" json:"id"`
+	ParkID     bson.ObjectId `bson:"parkID,omitempty" json:"parkID"`
+	Position   Point         `bson:"position,omitempty" json:"position"`
+	IsOccupied bool          `bson:"isOccupied,omitempty" json:"isOccupied"`
 }
 
 // Equal compares two Slot objects. Implements the Objecter interface
