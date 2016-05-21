@@ -7,6 +7,11 @@
                 "type": "POST",
                 "allowAnonymous": true,
                 "requireAdmin": false
+            },
+            "GetAll": {
+                "type": "GET",
+                "allowAnonymous": true,
+                "requireAdmin": false
             }
         }
     },

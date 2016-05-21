@@ -43,3 +43,14 @@ func Get(parkID bson.ObjectId) (*dbmodels.Park, error) {
 
 	return &park, err
 }
+
+// GetAll retrieves an array of Park entities from the database
+func GetAll() ([]*dbmodels.Park, error) {
+	session, collection := service.Connect(collectionName)
+	defer session.Close()
+
+	var park []*dbmodels.Park
+	err := collection.Find(nil).All(&park)
+
+	return park, err
+}

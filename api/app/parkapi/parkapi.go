@@ -5,6 +5,7 @@ import (
 	"parkme-api/api"
 	"parkme-api/orm/dbmodels"
 	"parkme-api/orm/models"
+	"parkme-api/orm/service/parkservice"
 	"parkme-api/orm/service/slotservice"
 	"parkme-api/util/jsonutil"
 )
@@ -26,7 +27,8 @@ func (p *ParkAPI) Register(params *api.Request) api.Response {
 		return api.BadRequest(api.ErrEntityIntegrity)
 	}
 
-	if !params.Identity.IsAuthorized() {
+	existingParkPlace, err := parkservice.Get(model.ID)
+	if err != nil || existingParkPlace == nil {
 		return handleNewParkRegistration(model)
 	}
 
@@ -41,4 +43,19 @@ func (p *ParkAPI) Register(params *api.Request) api.Response {
 	}
 
 	return api.StatusResponse(http.StatusOK)
+}
+
+// GetAll returns all the exiting parking places
+func (p *ParkAPI) GetAll(params *api.Request) api.Response {
+	parkingPlaces, err := parkservice.GetAll()
+	if err != nil {
+		return api.InternalServerError(err)
+	}
+
+	parks := make([]*models.Park, len(parkingPlaces))
+	for i := 0; i < len(parkingPlaces); i++ {
+		parks[i].Expand(*parkingPlaces[i])
+	}
+
+	return api.JSONResponse(http.StatusOK, parks)
 }
