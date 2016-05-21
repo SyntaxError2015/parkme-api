@@ -1,9 +1,9 @@
 package slotservice
 
 import (
-	"apiGO/service"
 	"errors"
 	"parkme-api/orm/dbmodels"
+	"parkme-api/orm/service"
 
 	"gopkg.in/mgo.v2/bson"
 )

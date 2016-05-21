@@ -2,7 +2,7 @@ package cookies
 
 import (
 	"parkme-api/orm/service"
-
+	"log"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -81,7 +81,7 @@ func (store *DatabaseCookieStore) Init() {
 func (store *DatabaseCookieStore) hasTokenIndex(collection *mgo.Collection) bool {
 	indexes, err := collection.Indexes()
 	if err != nil {
-		panic(ErrInitializationFailed)
+		log.Println(ErrInitializationFailed, err)
 	}
 
 	for _, index := range indexes {
