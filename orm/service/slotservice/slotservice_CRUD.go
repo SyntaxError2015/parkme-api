@@ -26,7 +26,30 @@ func CreateMultiple(slots []models.Slot) error {
 	session, collection := service.Connect(collectionName)
 	defer session.Close()
 
+	for i := 0; i < len(slots); i++ {
+		if slots[i].ID == nil || len(slots[i].ID) == 0 {
+			slots[i].ID = bson.NewObjectId()
+		}
+	}
+
 	err := collection.Insert(slots...)
+
+	return slots, err
+}
+
+// UpdateMultiple updates multiple Slot entities
+func UpdateMultiple(slots []models.Slot) error {
+	session, collection := service.Connect(collectionName)
+	defer session.Close()
+
+	var err error
+	for slot := range slots {
+		err = collection.UpdateId(slot.ID, slot)
+
+		if er != nil {
+			return err
+		}
+	}
 
 	return slots, err
 }
