@@ -22,7 +22,7 @@ func GetAll(parkID bson.ObjectId) ([]*dbmodels.Slot, error) {
 }
 
 // CreateMultiple adds new Slots to the database
-func CreateMultiple(slots []*models.Slot) error {
+func CreateMultiple(slots []models.Slot) error {
 	session, collection := service.Connect(collectionName)
 	defer session.Close()
 

@@ -5,7 +5,7 @@ import "parkme-api/orm/dbmodels"
 // Point contains the left-upper and bottom-lower points of a rectangle in which an entire zone is located
 type Point struct {
 	X float64 `json:"x"`
-	Y float64 `json:"Y"`
+	Y float64 `json:"y"`
 }
 
 // Expand copies the dbmodels.Point to a Point expands all
