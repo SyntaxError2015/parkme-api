@@ -2,6 +2,7 @@ package models
 
 import (
 	"parkme-api/orm/dbmodels"
+	"parkme-api/orm/service/parkservice"
 
 	"gopkg.in/mgo.v2/bson"
 )
@@ -19,7 +20,9 @@ func (slot *Slot) Expand(dbSlot dbmodels.Slot) {
 	slot.ID = dbSlot.ID
 	slot.Position.Expand(dbSlot.Position)
 
-	park, _ = parkservice.Get(dbSlot.ParkID)
+	dbPark, _ := parkservice.Get(dbSlot.ParkID)
+	park := Park{}
+	park.Expand(*dbPark)
 
 	slot.Park = park
 }
