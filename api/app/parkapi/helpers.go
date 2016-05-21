@@ -6,6 +6,7 @@ import (
 	"parkme-api/api"
 	"parkme-api/auth"
 	"parkme-api/auth/identity"
+	"parkme-api/orm/dbmodels"
 	"parkme-api/orm/models"
 	"parkme-api/orm/service/parkservice"
 	"parkme-api/orm/service/slotservice"
@@ -26,7 +27,12 @@ func handleNewParkRegistration(model *models.Park) api.Response {
 		return api.InternalServerError(err)
 	}
 
-	err = slotservice.CreateMultiple(park.slots)
+	newSlots := make([]dbmodels.Slot, len(model.Slots))
+	for i := 0; i < len(newSlots); i++ {
+		newSlots[i] = *model.Slots[i].Collapse()
+	}
+
+	err = slotservice.CreateMultiple(newSlots)
 	if err != nil {
 		return api.InternalServerError(err)
 	}
@@ -35,13 +41,13 @@ func handleNewParkRegistration(model *models.Park) api.Response {
 }
 
 func respondWithCreatedPark(id bson.ObjectId) api.Response {
-	park, err := service.Get(id)
+	park, err := parkservice.Get(id)
 	if err != nil {
 		return api.InternalServerError(err)
 	}
 
 	model := &models.Park{}
-	model.Expand(park)
+	model.Expand(*park)
 
 	return api.JSONResponse(http.StatusCreated, model)
 }
@@ -52,10 +58,11 @@ func createParkAppUser(park *models.Park) error {
 		return err
 	}
 
-	appUser, err = auth.CreateAppUser(fmt.Sprintf("park-%s@parkme.syntaxerror2016", uuid), uuid, identity.AccountTypeNormalUser, "")
+	appUser, err := auth.CreateAppUser(fmt.Sprintf("park-%s@parkme.syntaxerror2016", uuid), uuid, identity.AccountTypeNormalUser, "")
 	if err != nil {
 		return err
 	}
 
 	park.AppUserID = appUser.ID
+	return nil
 }

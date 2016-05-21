@@ -3,6 +3,7 @@ package parkapi
 import (
 	"net/http"
 	"parkme-api/api"
+	"parkme-api/orm/dbmodels"
 	"parkme-api/orm/models"
 	"parkme-api/orm/service/slotservice"
 	"parkme-api/util/jsonutil"
@@ -26,13 +27,13 @@ func (p *ParkAPI) Register(params *api.Request) api.Response {
 	}
 
 	if !params.Identity.IsAuthorized() {
-		return handleNewParkRegistration(park)
+		return handleNewParkRegistration(model)
 	}
 
 	// update all the slots with their data
-	slots := make([]dbModels.Slot, len(parkingSlots))
+	slots := make([]dbmodels.Slot, len(parkingSlots))
 	for i := 0; i < len(slots); i++ {
-		slots[i] = parkingSlots[i].Collapse()
+		slots[i] = *parkingSlots[i].Collapse()
 	}
 	err = slotservice.UpdateMultiple(slots)
 	if err != nil {

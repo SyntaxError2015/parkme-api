@@ -12,17 +12,17 @@ type SlotAPI int
 
 // UpdateSlot updates the status of a certain parking slot of a parking place
 func (s *SlotAPI) UpdateSlot(params *api.Request) api.Response {
-	model = &SlotUpdateModel{}
+	model := &SlotUpdateModel{}
 
 	err := jsonutil.DeserializeJSON(params.Body, model)
 	if err != nil {
 		return api.BadRequest(api.ErrEntityFormat)
 	}
 
-	slot = model.Collapse()
-	err = slotservice.Update(slot)
+	slot := model.Slot.Collapse()
+	err = slotservice.Update(slot.ID, slot)
 	if err != nil {
-		return err
+		return api.InternalServerError(err)
 	}
 
 	return api.StatusResponse(http.StatusOK)
