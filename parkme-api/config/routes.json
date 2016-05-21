@@ -5,7 +5,7 @@
         "actions": {
             "Register": {
                 "type": "POST",
-                "allowAnonymous": false,
+                "allowAnonymous": true,
                 "requireAdmin": false
             }
         }
@@ -16,7 +16,7 @@
         "actions": {
             "UpdateSlot": {
                 "type": "PUT",
-                "allowAnonymous": false,
+                "allowAnonymous": true,
                 "requireAdmin": false
             }
         }
