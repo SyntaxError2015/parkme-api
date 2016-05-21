@@ -6,6 +6,7 @@ import "gopkg.in/mgo.v2/bson"
 type Park struct {
 	ID       bson.ObjectId `bson:"_id" json:"id"`
 	Address  string        `bson:"address" json:"address"`
+	Status   int           `bson:"status" json:"status"`
 	Position Point         `bson:"position" json:"position"`
 }
 
@@ -20,6 +21,8 @@ func (park Park) Equal(obj Objecter) bool {
 	case park.ID != otherPark.ID:
 		return false
 	case park.Address != otherPark.Address:
+		return false
+	case park.Status != otherPark.Status:
 		return false
 	case !park.Position.Equal(otherPark.Position):
 		return false

@@ -23,6 +23,16 @@ func Create(park *dbmodels.Park) error {
 	return err
 }
 
+// Update adds a new Park to the database
+func Update(id bson.ObjectId, park *dbmodels.Park) error {
+	session, collection := service.Connect(collectionName)
+	defer session.Close()
+
+	err := collection.UpdateId(id, park)
+
+	return err
+}
+
 // Get retrieves an Park from the database, based on its ID
 func Get(parkID bson.ObjectId) (*dbmodels.Park, error) {
 	session, collection := service.Connect(collectionName)

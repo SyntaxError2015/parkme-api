@@ -9,9 +9,9 @@ import (
 
 // Slot reprents a square in a parking lot, where the car is parked
 type Slot struct {
-	ID       bson.ObjectId `bson:"_id" json:"id"`
-	Park     Park          `bson:"park" json:"park"`
-	Position Point         `bson:"position" json:"position"`
+	ID       bson.ObjectId `json:"id"`
+	Park     Park          `json:"park"`
+	Position Point         `json:"position"`
 }
 
 // Expand copies the dbmodels.Slot to a Slot expands all

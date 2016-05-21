@@ -2,15 +2,24 @@ package models
 
 import (
 	"parkme-api/orm/dbmodels"
+	"parkme-api/orm/service/slotservice"
 
 	"gopkg.in/mgo.v2/bson"
 )
 
+// Constants describing the status of a parking lot
+const (
+	ParkStatusOffline = iota
+	ParkStatusOnline  = iota
+)
+
 // Park represents an entire parking lot, which has one or more slots in which cars are parked
 type Park struct {
-	ID       bson.ObjectId `bson:"_id" json:"id"`
-	Address  string        `bson:"address" json:"address"`
-	Position Point         `bson:"position" json:"position"`
+	ID       bson.ObjectId `json:"id"`
+	Address  string        `json:"address"`
+	Status   int           `json:"status"`
+	Position Point         `json:"position"`
+	Slots    []Slot        `json:"slots"`
 }
 
 // Expand copies the dbmodels.Park to a Park expands all
@@ -18,11 +27,15 @@ type Park struct {
 func (park *Park) Expand(dbPark dbmodels.Park) {
 	park.ID = dbPark.ID
 	park.Address = dbPark.Address
+	park.Status = dbPark.status
 
 	var position = &Point{}
 	position.Expand(dbPark.Position)
 
+	var slots = slotservice.GetAll(park.ID)
+
 	park.Position = *position
+	park.Slots = slots
 }
 
 // Collapse coppies the Park to a dbmodels.Park user and
@@ -31,6 +44,7 @@ func (park *Park) Collapse() *dbmodels.Park {
 	dbPark := dbmodels.Park{
 		ID:      park.ID,
 		Address: park.Address,
+		Status:  park.Status,
 	}
 
 	var position = park.Position.Collapse()
