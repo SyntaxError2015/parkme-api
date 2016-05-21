@@ -29,12 +29,16 @@ func (park *Park) Expand(dbPark dbmodels.Park) {
 	park.ID = dbPark.ID
 	park.AppUserID = dbPark.AppUserID
 	park.Address = dbPark.Address
-	park.Status = dbPark.status
+	park.Status = dbPark.Status
 
 	var position = &Point{}
 	position.Expand(dbPark.Position)
 
-	var slots = slotservice.GetAll(park.ID)
+	dbSlots, _ := slotservice.GetAll(park.ID)
+	slots := make([]Slot, len(dbSlots))
+	for i := 0; i < len(dbSlots); i++ {
+		slots[i].Expand(*dbSlots[i])
+	}
 
 	park.Position = *position
 	park.Slots = slots
