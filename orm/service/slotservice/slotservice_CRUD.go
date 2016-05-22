@@ -51,7 +51,7 @@ func UpdateMultiple(slots []dbmodels.Slot) error {
 			return errors.New("Empty ID for update")
 		}
 
-		err = collection.UpdateId(slot.ID, slot)
+		_, err = collection.UpsertId(slot.ID, slot)
 
 		if err != nil {
 			return err
