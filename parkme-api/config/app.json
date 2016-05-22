@@ -1,0 +1,6 @@
+{
+	"applicationName": "parkme-api",
+	"apiInstance": "/api1/",
+	"httpServerAddress": "0.0.0.0:1234",
+    "serverType": "http"
+}

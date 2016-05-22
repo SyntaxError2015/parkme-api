@@ -15,8 +15,8 @@ import (
 	"parkme-api/security"
 	"parkme-api/servers"
 	"runtime"
-	"parkme-api/api/app/parkapi"
-	"parkme-api/api/app/slotapi"
+	"parkme-api/api/parkapi"
+	"parkme-api/api/slotapi"
 )
 
 var numberOfProcessors = runtime.NumCPU()

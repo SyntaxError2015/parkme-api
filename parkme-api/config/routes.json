@@ -1,0 +1,29 @@
+[
+    {
+        "id": "ParksRoute",
+        "endpoint": "/parks",
+        "actions": {
+            "Register": {
+                "type": "POST",
+                "allowAnonymous": true,
+                "requireAdmin": false
+            },
+            "GetAll": {
+                "type": "GET",
+                "allowAnonymous": true,
+                "requireAdmin": false
+            }
+        }
+    },
+    {
+        "id": "SlotsRoute",
+        "endpoint": "/slots",
+        "actions": {
+            "UpdateSlot": {
+                "type": "PUT",
+                "allowAnonymous": true,
+                "requireAdmin": false
+            }
+        }
+    }
+]

@@ -1,0 +1,9 @@
+{
+	"databaseName": "parkme_db",
+	"user": "parkme-user",
+	"pass": "parkme-pass",
+	"driver": "mongodb",
+	"hosts": [ 
+		"localhost"
+	]
+}
