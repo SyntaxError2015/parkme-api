@@ -1,6 +1,7 @@
 package parkapi
 
 import (
+	"log"
 	"net/http"
 	"parkme-api/api"
 	"parkme-api/orm/dbmodels"
@@ -49,11 +50,20 @@ func (p *ParkAPI) Register(params *api.Request) api.Response {
 func (p *ParkAPI) GetAll(params *api.Request) api.Response {
 	parkingPlaces, err := parkservice.GetAll()
 	if err != nil {
+		log.Println(err)
 		return api.InternalServerError(err)
 	}
 
-	parks := make([]*models.Park, len(parkingPlaces))
+	// append(piPark.Slots, models.Slot
+	// parks := make([]*models.Park, len(parkingPlaces))
+
+	var parks []models.Park
+
+	log.Println(*parkingPlaces[0])
+
 	for i := 0; i < len(parkingPlaces); i++ {
+		parks = append(parks, models.Park{})
+
 		parks[i].Expand(*parkingPlaces[i])
 	}
 

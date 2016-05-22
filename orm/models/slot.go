@@ -2,7 +2,6 @@ package models
 
 import (
 	"parkme-api/orm/dbmodels"
-	"parkme-api/orm/service/parkservice"
 
 	"gopkg.in/mgo.v2/bson"
 )
@@ -22,8 +21,9 @@ func (slot *Slot) Expand(dbSlot dbmodels.Slot) {
 	slot.IsOccupied = dbSlot.IsOccupied
 	slot.Position.Expand(dbSlot.Position)
 
-	dbPark, _ := parkservice.Get(dbSlot.ParkID)
-	slot.Park.Expand(*dbPark)
+	// THIS IS recursivity !!!!!
+	// dbPark, _ := parkservice.Get(dbSlot.ParkID)
+	// slot.Park.Expand(*dbPark)
 }
 
 // Collapse coppies the Slot to a dbmodels.Slot user and
