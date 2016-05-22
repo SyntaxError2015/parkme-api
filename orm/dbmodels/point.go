@@ -2,8 +2,8 @@ package dbmodels
 
 // Point contains the left-upper and bottom-lower points of a rectangle in which an entire zone is located
 type Point struct {
-	X float64 `bson:"x,omitempty" json:"x"`
-	Y float64 `bson:"y,omitempty" json:"y"`
+	X float64 `bson:"x" json:"x"`
+	Y float64 `bson:"y" json:"y"`
 }
 
 // Equal compares two Point objects. Implements the Objecter interface

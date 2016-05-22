@@ -4,11 +4,11 @@ import "gopkg.in/mgo.v2/bson"
 
 // Park represents an entire parking lot, which has one or more slots in which cars are parked
 type Park struct {
-	ID        bson.ObjectId `bson:"_id,omitempty" json:"id"`
-	AppUserID bson.ObjectId `bson:"appUserID,omitempty" json:"appUserID"`
-	Address   string        `bson:"address,omitempty" json:"address"`
-	Status    int           `bson:"status,omitempty" json:"status"`
-	Position  Point         `bson:"position,omitempty" json:"position"`
+	ID        bson.ObjectId `bson:"_id" json:"id"`
+	AppUserID bson.ObjectId `bson:"appUserID" json:"appUserID"`
+	Address   string        `bson:"address" json:"address"`
+	Status    int           `bson:"status" json:"status"`
+	Position  Point         `bson:"position" json:"position"`
 }
 
 // Equal compares two Park objects. Implements the Objecter interface
